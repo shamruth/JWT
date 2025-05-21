@@ -1,0 +1,35 @@
+<form>
+    <h1>REGISTER</h1>
+    <input type="text" id="username" placeholder="ENTER USERNAME">
+    <input type="text" id="password" placeholder="ENTER PASSWORD">
+    <button type="submit" onclick="AUTHENTICATE()">LOGIN</button>
+</form>
+<script>
+
+    const temp_secretkey=[]
+
+    async function AUTHENTICATE()
+    {
+        un=document.getElementById("username").value;
+        ps=document.getElementById("password").value;
+
+        jsondata={
+            username:un,
+            password:ps
+        }
+
+        const send_info=await fetch("/AUTHENT",
+            {
+                method:"POST",
+                headers:{"Content-Type":"application/json"},
+                body:JSON.stringify(jsondata),
+            }
+        )
+
+        const encoded_token= await send_info.json();
+        temp_secretkey.push(encoded_token);
+
+
+
+    }
+</script>
