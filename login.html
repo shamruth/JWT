@@ -1,24 +1,22 @@
 <form>
-    <h1>REGISTER</h1>
+    <h1>LOGIN</h1>
     <input type="text" id="username" placeholder="ENTER USERNAME">
-    <input type="text" id="password" placeholder="ENTER PASSWORD">
-    <button type="submit" onclick="AUTHENTICATE()">LOGIN</button>
+    <input type="text" id="email" placeholder="ENTER EMAIL">
+    <button type="button" onclick="LOGIN()">LOGIN</button>
 </form>
 <script>
-
-    const temp_secretkey=[]
-
-    async function AUTHENTICATE()
+    temp_secretkey=[]
+    async function LOGIN()
     {
         un=document.getElementById("username").value;
-        ps=document.getElementById("password").value;
+        em=document.getElementById("email").value;
 
         jsondata={
-            username:un,
-            password:ps
+            USERNAME:un,
+            EMAIL:em
         }
 
-        const send_info=await fetch("/AUTHENT",
+        const send_info=await fetch("/LOGIN",
             {
                 method:"POST",
                 headers:{"Content-Type":"application/json"},
@@ -28,8 +26,5 @@
 
         const encoded_token= await send_info.json();
         temp_secretkey.push(encoded_token);
-
-
-
     }
 </script>
